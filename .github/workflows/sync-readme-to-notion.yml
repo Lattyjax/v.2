@@ -1,0 +1,98 @@
+name: Sync README to Notion
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "README.md"
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install deps
+        run: npm i @notionhq/client
+
+      - name: Sync README.md to Notion page
+        env:
+          NOTION_TOKEN: $ secrets.NOTION_TOKEN 
+          NOTION_PAGE_ID: $ secrets.NOTION_PAGE_ID 
+        run: |
+          node <<'NODE'
+          const fs = require("fs");
+          const { Client } = require("@notionhq/client");
+
+          const notion = new Client({ auth: process.env.NOTION_TOKEN });
+          const pageId = process.env.NOTION_PAGE_ID;
+
+          const readme = fs.readFileSync("README.md", "utf8");
+
+          // Reliable, minimal sync:
+          // overwrite the page’s children with plain text blocks.
+          const chunkSize = 1800;
+          const lines = readme.split("\n");
+
+          const blocks = [];
+          let buffer = "";
+          for (const line of lines) {
+            const toAdd = (buffer ? "\n" : "") + line;
+            if ((buffer + toAdd).length > chunkSize) {
+              blocks.push({
+                object: "block",
+                type: "paragraph",
+                paragraph: {
+                  rich_text: [{ type: "text", text: { content: buffer } }]
+                }
+              });
+              buffer = line;
+            } else {
+              buffer += toAdd;
+            }
+          }
+          if (buffer.trim().length) {
+            blocks.push({
+              object: "block",
+              type: "paragraph",
+              paragraph: {
+                rich_text: [{ type: "text", text: { content: buffer } }]
+              }
+            });
+          }
+
+          async function run() {
+            const existing = await notion.blocks.children.list({
+              block_id: pageId,
+              page_size: 100,
+            });
+            const existingIds = existing.results.map(b => b.id);
+
+            // Archive existing blocks
+            for (const id of existingIds) {
+              await notion.blocks.update({ block_id: id, archived: true });
+            }
+
+            // Append new blocks (50 at a time)
+            const batchSize = 50;
+            for (let i = 0; i < blocks.length; i += batchSize) {
+              await notion.blocks.children.append({
+                block_id: pageId,
+                children: blocks.slice(i, i + batchSize),
+              });
+            }
+
+            console.log("Synced README to Notion.");
+          }
+
+          run().catch(err => {
+            console.error(err);
+            process.exit(1);
+          });
+          NODE
