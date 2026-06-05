@@ -1,0 +1,26 @@
+Optimizations applied:
+- Extracted reusable shared navigation/footer into app/_components/site-shell.tsx
+- Moved mobile menu state into isolated client component app/_components/mobile-nav.tsx
+- Converted public marketing pages to server components where possible:
+  - /
+  - /about
+  - /products
+  - /services
+  - /contact
+  - /join
+- Kept /education as a client component only because it uses accordion state
+- Replaced several raw <img> tags with next/image for optimized loading:
+  - home hero image
+  - about story images
+  - contact QR code
+  - shared site logo
+- Improved analytics dispatch in app/_components/public-tracker.tsx:
+  - navigator.sendBeacon first
+  - fetch fallback with keepalive
+- Simplified Prisma singleton in lib/prisma.ts and removed process beforeExit hook
+- Tightened Next config:
+  - removed ignoreBuildErrors / ignoreDuringBuilds
+  - enabled standalone output
+  - disabled poweredByHeader
+  - kept compression and image formats
+- Added shared nav definitions for default and join flows

@@ -1,0 +1,304 @@
+{
+  "source": "gptcha.in",
+  "version": "3.2.0",
+  "metadata": {
+    "name": "Latimore AI Social Content System",
+    "description": "End-to-end GPT-Chain workflow for Latimore Life & Legacy LLC to generate weekly social content, video scripts, Canva briefs, Notion-ready entries, CTAs, and engagement-based expansion while staying on-brand and compliance-aware.",
+    "tags": [
+      "marketing",
+      "social media",
+      "content automation",
+      "insurance",
+      "latimore"
+    ]
+  },
+  "workflow": {
+    "nodes": [
+      {
+        "id": "1",
+        "type": "START",
+        "position": {
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "id": "2",
+        "type": "DEFAULT",
+        "label": "\ud83d\ude80 Brand Brain Setup",
+        "prompt": "You are the dedicated content strategist and copy partner for {brand_name}, an insurance and financial protection firm serving {service_regions}.\n\nYour job is to help {brand_name} create consistent, compliance-aware content for {primary_platforms}.\n\nBrand tone:\n- {brand_tone_summary}\n- Community-focused, calm, and practical\n- Emphasizes preparation instead of fear\n- Clear, 8th-grade readability\n- No hype or exaggerated claims\n\nCore message and positioning:\n- Core message: {core_message}\n- Tagline: {brand_tagline}\n- Local focus: {service_regions} with emphasis on {local_markets_focus}\n- Key themes: family protection, income stability, retirement readiness, and business continuity\n\nPrimary audience segments:\n1. Young families focused on mortgage and income protection\n2. Pre-retirees focused on income stability, IRA rollovers, and annuities\n3. Business owners focused on key person and buy-sell planning\n4. School district and municipal employees seeking benefits and supplemental protection\n\nCompliance rules:\n- Avoid guarantees and absolute outcomes\n- Prefer language such as \"may,\" \"can,\" or \"typically\"\n- No specific product performance promises\n- Always include the compliance footer at the end of every piece of content:\n  {compliance_footer}\n\nYour global behavior:\n- Default to examples and scenarios relevant to {service_regions}\n- Prioritize education and clarity over persuasion\n- When in doubt, choose simple explanations and short paragraphs\n- When a prompt asks for content, assume it is for Facebook and LinkedIn unless otherwise stated\n\nAcknowledge this setup internally and be ready to generate content in line with this brand brain for all subsequent prompts in this workflow.",
+        "position": {
+          "x": 150,
+          "y": 0
+        }
+      },
+      {
+        "id": "3",
+        "type": "DEFAULT",
+        "label": "\ud83d\udcc5 Weekly Social Batch",
+        "prompt": "You are using the Latimore Brand Brain.\n\nTask:\nCreate a full weekly batch of social content for {brand_name}.\n\nInputs:\n- Target audience segment for this week: {target_audience_segment}\n- Week start date: {week_start_date}\n- Publishing platforms: {primary_platforms}\n- Service regions: {service_regions}\n\nStructure:\nGenerate exactly 5 posts for this week with the following pattern:\n\n- Monday \u2013 Education post\n- Tuesday \u2013 FAQ post\n- Wednesday \u2013 Founder or local authority positioning post\n- Thursday \u2013 Objection breaker post\n- Friday \u2013 Soft call-to-action post\n\nContent requirements:\n- Each post should be between 120 and 220 words.\n- Write in clear, 8th-grade readability.\n- Use calm, confident, community-focused language.\n- Include local Pennsylvania context, referencing {service_regions} and, where helpful, specific local cues tied to {local_markets_focus}.\n- Keep persuasion gentle; focus on education and relevance.\n- Avoid absolute guarantees; use language like \"may,\" \"can,\" or \"typically.\"\n\nFormatting:\nFor each day, output:\n\nDay: [Day Name]\nPlatform: [list which of {primary_platforms} this is optimized for]\nAudience Segment: {target_audience_segment}\nPost Copy:\n[body text]\n\nAt the end of each post, append the compliance footer exactly as:\n{compliance_footer}",
+        "position": {
+          "x": 350,
+          "y": 0
+        }
+      },
+      {
+        "id": "4",
+        "type": "DEFAULT",
+        "label": "\ud83d\uddd3\ufe0f Weekly Calendar Formatter",
+        "prompt": "You are using the Latimore Brand Brain.\n\nTask:\nTake an existing set of five weekly posts generated in this conversation and convert them into a simple content calendar format that can be pasted into a spreadsheet, Notion database, or Google Sheet.\n\nInputs:\n- Raw weekly posts: [paste the five posts here]\n- Desired fields: {database_fields}\n- Week start date: {week_start_date}\n\nInstructions:\n1. Parse each of the five posts.\n2. For each post, infer and fill values for:\n   - Audience\n   - Content pillar (education, FAQ, authority, objection, CTA)\n   - Post type (long-form, short-form, carousel, reel idea, etc.)\n   - Status (idea, drafted, approved, scheduled)\n   - Scheduled Date (assign a realistic date for each weekday starting from {week_start_date})\n   - CTA type (awareness, lead magnet, booking, quote request, etc.)\n   - Platform(s) from {primary_platforms}\n3. Present the result as a markdown table with one row per post and one column per field in {database_fields}.\n4. Keep all copy exactly as written in the original posts, only trimming whitespace if necessary.\n5. Do not change tone or message; only structure and annotate.\n\nAt the end, briefly list any patterns you notice in tone, topics, or CTAs that could inform next week\u2019s batch.",
+        "position": {
+          "x": 550,
+          "y": 0
+        }
+      },
+      {
+        "id": "5",
+        "type": "DEFAULT",
+        "label": "\ud83c\udfac Video Script Generator",
+        "prompt": "You are using the Latimore Brand Brain.\n\nTask:\nWrite a 30-second vertical video script suitable for Facebook Reels, Instagram Reels, TikTok, and YouTube Shorts.\n\nInputs:\n- Topic: {video_topic}\n- Primary audience segment: {video_audience_segment}\n- Service regions: {service_regions}\n\nStructure:\n- Hook (first 3 seconds): a short, clear line that speaks directly to the audience segment and problem.\n- Value explanation (about 20 seconds): simple explanation of the concept, using one concrete example that fits {service_regions}.\n- Call to action (about 7 seconds): calm, clear next step that points them to a low-friction action.\n\nRequirements:\n- Write the script as spoken lines, with line breaks for each beat.\n- Indicate scene or shot changes with simple labels like:\n  [Hook]\n  [Explain]\n  [CTA]\n- Keep language conversational, calm, and non-alarmist.\n- Avoid guarantees; use phrases like \"may help,\" \"can protect,\" or \"typically looks like.\"\n- End with a spoken CTA that references a booking or quote action without being pushy.\n\nAfter the script, include one or two alternative hooks as options, written as standalone lines.",
+        "position": {
+          "x": 750,
+          "y": 0
+        }
+      },
+      {
+        "id": "6",
+        "type": "DEFAULT",
+        "label": "\ud83c\udfa8 Canva Visual Brief",
+        "prompt": "You are using the Latimore Brand Brain.\n\nTask:\nCreate a concise visual brief for a Canva design that matches the Latimore visual system and supports one specific post or video.\n\nInputs:\n- Content type: [e.g., static post, carousel, reel cover, story]\n- Core message: [short explanation of the main idea]\n- Primary audience segment: {target_audience_segment}\n- Brand colors:\n  - Primary: {visual_primary_color_hex}\n  - Accent: {visual_accent_color_hex}\n- Logo description: {visual_logo_description}\n- Visual style rules: {visual_style_rules}\n\nLatimore visual rules:\n- Use a navy-style primary background related to {visual_primary_color_hex}.\n- Use a gold-style accent related to {visual_accent_color_hex}.\n- Incorporate a shield plus heartbeat arrow concept in the layout where possible.\n- Slide 1 or main frame must contain a large, clear headline.\n- For carousels, include 3 to 5 content slides and one CTA slide.\n- Do not use gradients.\n- Avoid generic corporate stock imagery; prioritize local, real-feeling visuals aligned with {service_regions}.\n\nOutput format:\n1. Design overview: one short paragraph describing the concept.\n2. Slide-by-slide plan (or frame-by-frame for video covers), including:\n   - Slide number\n   - Headline text\n   - Supporting text\n   - Visual notes (icons, imagery, layout)\n3. Final CTA slide specification, including:\n   - Exact CTA text\n   - Where to place the booking or quote link reference\n4. Include a short section called \"Canva Notes\" with any practical tips for how to implement this easily using standard Canva tools.",
+        "position": {
+          "x": 950,
+          "y": 0
+        }
+      },
+      {
+        "id": "7",
+        "type": "DEFAULT",
+        "label": "\ud83d\udcc2 Notion Content OS Entry",
+        "prompt": "You are using the Latimore Brand Brain.\n\nTask:\nConvert content ideas or finished posts into structured entries for a Notion-based Content OS.\n\nInputs:\n- Raw content or ideas: [paste here]\n- Database fields: {database_fields}\n- Week start date: {week_start_date}\n\nInstructions:\n1. Read the raw content and identify each distinct asset (post, script, idea).\n2. For each asset, fill out the following example fields, mapping them to {database_fields}:\n   - Audience\n   - Pillar (education, FAQ, authority, objection, lead gen)\n   - Post type (text, carousel, reel, live, email)\n   - Status (idea, drafted, edited, approved, scheduled, published)\n   - Scheduled Date (assign realistic dates based on {week_start_date})\n   - CTA Type (fillout form, quote link, booking link, awareness only)\n   - Performance Notes (leave blank or \"to be filled after posting\")\n3. Output a markdown table with one row per asset and one column per field in {database_fields}.\n4. Keep titles and summaries short and practical.\n\nAfter the table, propose three simple automation ideas for how this database could connect to posting tools or reminders, without going into technical setup details.",
+        "position": {
+          "x": 1150,
+          "y": 0
+        }
+      },
+      {
+        "id": "8",
+        "type": "DEFAULT",
+        "label": "\ud83c\udfaf Lead Capture CTAs",
+        "prompt": "You are using the Latimore Brand Brain.\n\nTask:\nWrite soft, trust-building CTAs that move people from social content into a booking, quote, or scheduling experience.\n\nInputs:\n- CTA destination label: {cta_destination_label} (for example: \"Fillout scheduler,\" \"online quote form,\" \"calendar booking page\")\n- CTA destination URL (or placeholder): {cta_destination_url}\n- Day of the week this CTA will be used: {cta_usage_day}\n- Primary audience segment: {target_audience_segment}\n\nInstructions:\n1. Write three alternative soft CTAs that can be dropped at the end of a Friday-style post for {target_audience_segment}.\n2. Each CTA must:\n   - Feel like an invitation, not pressure.\n   - Emphasize education and clarity.\n   - Use language like \"explore,\" \"see your options,\" or \"find out what may fit your situation.\"\n3. Include the CTA destination label naturally in the text, and follow it with the URL in brackets so it is easy to paste.\n\nOutput format:\nCTA Option 1:\n[text\u2026 {cta_destination_label} ({cta_destination_url})]\n\nCTA Option 2:\n[text\u2026 {cta_destination_label} ({cta_destination_url})]\n\nCTA Option 3:\n[text\u2026 {cta_destination_label} ({cta_destination_url})]\n\nAt the end, remind the user to append the compliance footer:\n{compliance_footer}",
+        "position": {
+          "x": 1350,
+          "y": 0
+        }
+      },
+      {
+        "id": "9",
+        "type": "DEFAULT",
+        "label": "\ud83d\udcca Engagement Analyzer",
+        "prompt": "You are using the Latimore Brand Brain.\n\nTask:\nAnalyze prior high-performing posts and generate new ideas based on what has worked best so far.\n\nInputs:\n- Raw text of top-performing posts or content pieces for the past month:\n  {past_top_posts_raw}\n- Platforms: {primary_platforms}\n- Service regions: {service_regions}\n\nAnalysis:\n1. Identify patterns in:\n   - Tone and voice\n   - Topic categories\n   - Story structure and hooks\n   - CTA types and placement\n   - Local references to {service_regions}\n2. Summarize these patterns in a short bulleted section called \"What Works.\"\n\nGeneration:\n3. Based on \"What Works,\" generate 10 new post ideas that:\n   - Match the successful patterns without copying wording.\n   - Stay aligned with compliance rules and educational tone.\n   - Each include:\n     - Working title or hook\n     - Target audience segment\n     - Platform recommendation from {primary_platforms}\n     - One-sentence summary of the angle\n\nFormatting:\n- Present the \"What Works\" analysis first.\n- Then present the 10 ideas as a markdown table with columns:\n  - Idea #\n  - Hook or Title\n  - Audience Segment\n  - Platform\n  - One-Sentence Summary\n\nEnsure everything stays consistent with the Latimore Brand Brain and stays focused on long-term trust, not short-term hype.",
+        "position": {
+          "x": 1550,
+          "y": 0
+        }
+      },
+      {
+        "id": "10",
+        "type": "END",
+        "position": {
+          "x": 1750,
+          "y": 0
+        }
+      }
+    ],
+    "edges": [
+      {
+        "sourceNode": "1",
+        "targetNode": "2"
+      },
+      {
+        "sourceNode": "2",
+        "targetNode": "3"
+      },
+      {
+        "sourceNode": "3",
+        "targetNode": "4"
+      },
+      {
+        "sourceNode": "4",
+        "targetNode": "5"
+      },
+      {
+        "sourceNode": "5",
+        "targetNode": "6"
+      },
+      {
+        "sourceNode": "6",
+        "targetNode": "7"
+      },
+      {
+        "sourceNode": "7",
+        "targetNode": "8"
+      },
+      {
+        "sourceNode": "8",
+        "targetNode": "9"
+      },
+      {
+        "sourceNode": "9",
+        "targetNode": "10"
+      }
+    ],
+    "state": {
+      "keys": [
+        {
+          "name": "brand_name",
+          "type": "INPUT",
+          "values": [
+            "Latimore Life & Legacy LLC"
+          ]
+        },
+        {
+          "name": "service_regions",
+          "type": "INPUT",
+          "values": [
+            "Schuylkill, Luzerne, and Northumberland Counties in Pennsylvania"
+          ]
+        },
+        {
+          "name": "brand_tone_summary",
+          "type": "INPUT",
+          "values": [
+            "Authoritative, calm, community-focused, preparation over fear"
+          ]
+        },
+        {
+          "name": "core_message",
+          "type": "INPUT",
+          "values": [
+            "Protecting Today. Securing Tomorrow."
+          ]
+        },
+        {
+          "name": "brand_tagline",
+          "type": "INPUT",
+          "values": [
+            "#TheBeatGoesOn"
+          ]
+        },
+        {
+          "name": "primary_platforms",
+          "type": "INPUT",
+          "values": [
+            "Facebook, LinkedIn"
+          ]
+        },
+        {
+          "name": "compliance_footer",
+          "type": "INPUT",
+          "values": [
+            "Jackson M. Latimore Sr., Independent Insurance Consultant, PA License #1268820 | NIPR #21638507. Educational content only."
+          ]
+        },
+        {
+          "name": "target_audience_segment",
+          "type": "INPUT",
+          "values": [
+            "Young families in Schuylkill County"
+          ]
+        },
+        {
+          "name": "week_start_date",
+          "type": "INPUT",
+          "values": [
+            "2026-02-15"
+          ]
+        },
+        {
+          "name": "video_topic",
+          "type": "INPUT",
+          "values": [
+            "Group life vs personal coverage"
+          ]
+        },
+        {
+          "name": "video_audience_segment",
+          "type": "INPUT",
+          "values": [
+            "Pre-retirees approaching retirement"
+          ]
+        },
+        {
+          "name": "visual_primary_color_hex",
+          "type": "INPUT",
+          "values": [
+            "#2C3E50"
+          ]
+        },
+        {
+          "name": "visual_accent_color_hex",
+          "type": "INPUT",
+          "values": [
+            "#C49A6C"
+          ]
+        },
+        {
+          "name": "visual_logo_description",
+          "type": "INPUT",
+          "values": [
+            "Shield and house roof mark with heartbeat line turning into upward arrow"
+          ]
+        },
+        {
+          "name": "visual_style_rules",
+          "type": "INPUT",
+          "values": [
+            "Navy and gold, no gradients, clean typography, real local imagery"
+          ]
+        },
+        {
+          "name": "database_fields",
+          "type": "INPUT",
+          "values": [
+            "Audience; Pillar; Post Type; Status; Scheduled Date; CTA Type; Performance Notes"
+          ]
+        },
+        {
+          "name": "cta_destination_label",
+          "type": "INPUT",
+          "values": [
+            "Online calendar booking page"
+          ]
+        },
+        {
+          "name": "cta_destination_url",
+          "type": "INPUT",
+          "values": [
+            "https://example.com/book"
+          ]
+        },
+        {
+          "name": "cta_usage_day",
+          "type": "INPUT",
+          "values": [
+            "Friday"
+          ]
+        },
+        {
+          "name": "local_markets_focus",
+          "type": "INPUT",
+          "values": [
+            "Schuylkill County and surrounding Coal Region communities"
+          ]
+        },
+        {
+          "name": "past_top_posts_raw",
+          "type": "INPUT",
+          "values": [
+            "Post 1: ... Post 2: ... Post 3: ... Post 4: ... Post 5: ..."
+          ]
+        }
+      ]
+    }
+  }
+}

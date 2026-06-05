@@ -1,0 +1,94 @@
+---
+# ──────────────────────────────────────────────────────────────
+# REQUIRED FIELDS
+# ──────────────────────────────────────────────────────────────
+
+# The post title (shown in the hero and page <title>)
+title: "Your Post Title Here"
+
+# Short description used in cards, OG tags, and meta description.
+# Aim for 120–160 characters.
+description: "A compelling one- or two-sentence summary of what this post is about and why it matters to the reader."
+
+# Publication date in YYYY-MM-DD format
+date: "2024-01-01"
+
+# ──────────────────────────────────────────────────────────────
+# OPTIONAL FIELDS (with defaults shown)
+# ──────────────────────────────────────────────────────────────
+
+# Last updated date (if different from date). Omit if not applicable.
+# updated: "2024-06-01"
+
+# Author name (defaults to "Jackson M. Latimore Sr.")
+author: "Jackson M. Latimore Sr."
+
+# Category — must be one of:
+#   Life Insurance | Annuities & Retirement | Estate & Legacy Planning
+#   Business Protection | College Funding | Debt & Mortgage
+#   Financial Literacy | Community & Advocacy
+category: "Financial Literacy"
+
+# Tags — used for related content discovery and filtering
+tags: ["tag-one", "tag-two", "tag-three"]
+
+# Hero image path (relative to /public) — omit if no image
+# image: "/images/blog/your-image.jpg"
+# imageAlt: "Description of the image for screen readers"
+
+# Show this post in the Featured strip on the blog index?
+featured: false
+
+# Which CTA banner to show at the bottom of the post.
+# Options: consultation | quote | assessment | none
+cta: "consultation"
+
+# SEO overrides (optional — fall back to title/description if omitted)
+# seoTitle: "SEO-Optimized Title (under 60 chars)"
+# seoDescription: "SEO meta description (under 160 chars)"
+---
+
+## Introduction
+
+Start your article here. The content above the first heading sets the stage for the reader.
+
+Use `##` for main sections (H2) and `###` for subsections (H3) — these are extracted automatically for the Table of Contents sidebar.
+
+## Key Concepts
+
+Write your main content here.
+
+<Callout type="tip">
+Use the `<Callout>` component for helpful tips, warnings, or narrative asides.
+Available types: `tip` (gold), `warning` (amber), `story` (navy+gold).
+</Callout>
+
+## Data That Matters
+
+<StatsRow>
+  <Stat value="41%" label="of Americans say they lack enough life insurance" />
+  <Stat value="6 mo" label="median financial runway without a plan" />
+</StatsRow>
+
+<KeyTakeaway>
+The most important insight from this article in one or two sentences.
+</KeyTakeaway>
+
+## Comparison
+
+<ComparisonTable
+  headers={["Feature", "Option A", "Option B"]}
+  rows={[
+    ["Cost", "Lower", "Higher"],
+    ["Duration", "Fixed term", "Lifetime"],
+    ["Cash value", "None", "Grows over time"],
+  ]}
+/>
+
+## Take Action
+
+<InlineCTA
+  text="Ready to get personalized guidance?"
+  href="/book"
+  buttonText="Book Free Consultation"
+/>
