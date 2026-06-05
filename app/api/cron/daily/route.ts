@@ -52,6 +52,7 @@ export async function GET(req: NextRequest) {
   results.push(await runTask('lead-score-updates',    `${baseUrl}/api/cron/lead-score-updates`,    req))
   results.push(await runTask('appointment-reminders', `${baseUrl}/api/cron/appointment-reminders`, req))
   results.push(await runTask('notification-checks',   `${baseUrl}/api/cron/notification-checks`,   req))
+  results.push(await runTask('notion-sync',           `${baseUrl}/api/cron/notion-sync`,           req))
 
   const totalMs   = Date.now() - cronStart
   const succeeded = results.filter(r => r.ok).length
