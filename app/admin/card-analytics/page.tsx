@@ -52,7 +52,7 @@ function MiniBarChart({ data }: { data: DayStat[] }) {
               background: gold,
             }}
           />
-          <span classname="text-[10px] text-[#A9B1BE] mt-1 whitespace-nowrap">
+          <span className="text-[10px] text-[#A9B1BE] mt-1 whitespace-nowrap">
             {d.day.slice(5)}
           </span>
         </div>
